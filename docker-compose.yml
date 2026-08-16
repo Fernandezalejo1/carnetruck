@@ -1,0 +1,104 @@
+name: carnetruck
+
+services:
+  db:
+    image: timescale/timescaledb:latest-pg16
+    environment:
+      POSTGRES_USER: carnetruck
+      POSTGRES_PASSWORD: carnetruck
+      POSTGRES_DB: carnetruck
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U carnetruck -d carnetruck"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://carnetruck:carnetruck@db:5432/carnetruck
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      ALERT_EVAL_MODE: celery
+      SEED_DEMO: "true"
+      CORS_ORIGINS: "http://localhost:8080"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://carnetruck:carnetruck@db:5432/carnetruck
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      ALERT_EVAL_MODE: celery
+    command: celery -A app.workers.celery_app:celery_app worker -l info
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  beat:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://carnetruck:carnetruck@db:5432/carnetruck
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      MISSING_SIGNAL_THRESHOLD_MINUTES: "60"
+    command: celery -A app.workers.celery_app:celery_app beat -l info
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+  # --- Perfil opcional: ingesta directa por MQTT ---
+  # docker compose --profile mqtt up -d
+  mosquitto:
+    image: eclipse-mosquitto:2
+    ports:
+      - "1883:1883"
+    profiles: ["mqtt"]
+
+  mqtt-ingester:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://carnetruck:carnetruck@db:5432/carnetruck
+      MQTT_URL: mqtt://mosquitto:1883
+    command: python -m app.services.mqtt_ingester
+    profiles: ["mqtt"]
+    depends_on:
+      - mosquitto
+      - db
+
+volumes:
+  pgdata:

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="1200" height="700" fill="#0f172a" rx="12"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="60" fill="#1e293b"/>
+  <text x="30" y="38" fill="#22d3ee" font-size="18" font-weight="bold">❄️ Carnetruck</text>
+  <text x="1170" y="38" text-anchor="end" fill="#94a3b8" font-size="12">admin@carnetruck.com</text>
+  
+  <!-- Stats Row -->
+  <rect x="30" y="80" width="270" height="100" fill="#1e293b" stroke="#3b82f6" stroke-width="1" rx="8"/>
+  <text x="165" y="120" text-anchor="middle" fill="#3b82f6" font-size="32" font-weight="bold">3</text>
+  <text x="165" y="145" text-anchor="middle" fill="#94a3b8" font-size="12">Embarques en tránsito</text>
+  
+  <rect x="320" y="80" width="270" height="100" fill="#1e293b" stroke="#10b981" stroke-width="1" rx="8"/>
+  <text x="455" y="120" text-anchor="middle" fill="#10b981" font-size="32" font-weight="bold">12</text>
+  <text x="455" y="145" text-anchor="middle" fill="#94a3b8" font-size="12">Entregados</text>
+  
+  <rect x="610" y="80" width="270" height="100" fill="#1e293b" stroke="#ef4444" stroke-width="1" rx="8"/>
+  <text x="745" y="120" text-anchor="middle" fill="#ef4444" font-size="32" font-weight="bold">1</text>
+  <text x="745" y="145" text-anchor="middle" fill="#94a3b8" font-size="12">Rechazados</text>
+  
+  <rect x="900" y="80" width="270" height="100" fill="#1e293b" stroke="#f59e0b" stroke-width="1" rx="8"/>
+  <text x="1035" y="120" text-anchor="middle" fill="#f59e0b" font-size="32" font-weight="bold">4</text>
+  <text x="1035" y="145" text-anchor="middle" fill="#94a3b8" font-size="12">Alertas sin resolver</text>
+  
+  <!-- Alert Banner -->
+  <rect x="30" y="200" width="1140" height="50" fill="#451a03" stroke="#f59e0b" stroke-width="1" rx="6"/>
+  <text x="60" y="230" fill="#fbbf24" font-size="13">⚠️ Temperatura fuera de rango — Contenedor UY-2847 Shanghai</text>
+  
+  <!-- Table -->
+  <rect x="30" y="270" width="1140" height="400" fill="#1e293b" rx="8"/>
+  <text x="60" y="300" fill="white" font-size="15" font-weight="bold">Embarques</text>
+  
+  <!-- Table Header -->
+  <rect x="30" y="315" width="1140" height="35" fill="#0f172a"/>
+  <text x="80" y="337" fill="#64748b" font-size="11">CONTENEDOR</text>
+  <text x="250" y="337" fill="#64748b" font-size="11">DESTINO</text>
+  <text x="420" y="337" fill="#64748b" font-size="11">PRODUCTO</text>
+  <text x="590" y="337" fill="#64748b" font-size="11">TEMP ACTUAL</text>
+  <text x="720" y="337" fill="#64748b" font-size="11">RANGO</text>
+  <text x="870" y="337" fill="#64748b" font-size="11">ÚLTIMA LECTURA</text>
+  <text x="1050" y="337" fill="#64748b" font-size="11">ESTADO</text>
+  
+  <!-- Row 1 -->
+  <rect x="30" y="355" width="1140" height="50" fill="#1e293b"/>
+  <text x="80" y="385" fill="white" font-size="12" font-weight="bold">UY-2847</text>
+  <text x="250" y="385" fill="#94a3b8" font-size="12">Shanghai 🇨🇳</text>
+  <text x="420" y="385" fill="#94a3b8" font-size="12">Carne vacuna</text>
+  <text x="590" y="385" fill="#ef4444" font-size="12" font-weight="bold">-14.2°C</text>
+  <text x="720" y="385" fill="#94a3b8" font-size="12">-18 a -22°C</text>
+  <text x="870" y="385" fill="#64748b" font-size="11">Hace 12 min</text>
+  <rect x="1040" y="372" width="80" height="22" fill="#f59e0b" rx="4"/>
+  <text x="1080" y="387" text-anchor="middle" fill="#0f172a" font-size="10" font-weight="bold">Alerta</text>
+  
+  <!-- Row 2 -->
+  <rect x="30" y="410" width="1140" height="50" fill="#1e293b"/>
+  <text x="80" y="440" fill="white" font-size="12" font-weight="bold">UY-1923</text>
+  <text x="250" y="440" fill="#94a3b8" font-size="12">Hamburgo 🇩🇪</text>
+  <text x="420" y="440" fill="#94a3b8" font-size="12">Pollo entero</text>
+  <text x="590" y="440" fill="#10b981" font-size="12" font-weight="bold">-19.8°C</text>
+  <text x="720" y="440" fill="#94a3b8" font-size="12">-18 a -22°C</text>
+  <text x="870" y="440" fill="#64748b" font-size="11">Hace 5 min</text>
+  <rect x="1040" y="427" width="80" height="22" fill="#3b82f6" rx="4"/>
+  <text x="1080" y="442" text-anchor="middle" fill="white" font-size="10" font-weight="bold">En tránsito</text>
+  
+  <!-- Row 3 -->
+  <rect x="30" y="465" width="1140" height="50" fill="#1e293b"/>
+  <text x="80" y="495" fill="white" font-size="12" font-weight="bold">UY-3301</text>
+  <text x="250" y="495" fill="#94a3b8" font-size="12">São Paulo 🇧🇷</text>
+  <text x="420" y="495" fill="#94a3b8" font-size="12">Costillas</text>
+  <text x="590" y="495" fill="#10b981" font-size="12" font-weight="bold">-20.1°C</text>
+  <text x="720" y="495" fill="#94a3b8" font-size="12">-18 a -22°C</text>
+  <text x="870" y="495" fill="#64748b" font-size="11">Hace 8 min</text>
+  <rect x="1040" y="482" width="80" height="22" fill="#3b82f6" rx="4"/>
+  <text x="1080" y="497" text-anchor="middle" fill="white" font-size="10" font-weight="bold">En tránsito</text>
+  
+  <!-- Row 4 -->
+  <rect x="30" y="520" width="1140" height="50" fill="#1e293b"/>
+  <text x="80" y="550" fill="white" font-size="12" font-weight="bold">UY-0087</text>
+  <text x="250" y="550" fill="#94a3b8" font-size="12">Rotterdam 🇳🇱</text>
+  <text x="420" y="550" fill="#94a3b8" font-size="12">Lomo</text>
+  <text x="590" y="550" fill="#10b981" font-size="12" font-weight="bold">-18.5°C</text>
+  <text x="720" y="550" fill="#94a3b8" font-size="12">-18 a -22°C</text>
+  <text x="870" y="550" fill="#64748b" font-size="11">Hace 3 min</text>
+  <rect x="1040" y="537" width="80" height="22" fill="#10b981" rx="4"/>
+  <text x="1080" y="552" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Entregado</text>
+  
+  <!-- Map placeholder -->
+  <rect x="30" y="590" width="550" height="100" fill="#0f172a" stroke="#1e293b" stroke-width="1" rx="8"/>
+  <text x="305" y="630" text-anchor="middle" fill="#64748b" font-size="12">🗺️ Mapa en vivo — Leaflet + OpenStreetMap</text>
+  <text x="305" y="660" text-anchor="middle" fill="#475569" font-size="10">3 embarques activos en tránsito</text>
+  
+  <!-- Chart placeholder -->
+  <rect x="600" y="590" width="570" height="100" fill="#0f172a" stroke="#1e293b" stroke-width="1" rx="8"/>
+  <text x="885" y="630" text-anchor="middle" fill="#64748b" font-size="12">📈 Gráfico de temperatura — Recharts</text>
+  <text x="885" y="660" text-anchor="middle" fill="#475569" font-size="10">Últimas 24hs — UY-2847</text>
+  
+  <text x="600" y="695" text-anchor="middle" fill="#475569" font-size="9">Carnetruck — IoT Cold-Chain Monitoring for Meat Exports</text>
+</svg>

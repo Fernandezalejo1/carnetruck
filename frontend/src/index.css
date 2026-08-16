@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-slate-100 text-slate-900;
+}
+
+/* Evitar que los tiles de Leaflet tapen menús/overlays */
+.leaflet-container {
+  z-index: 0;
+}
