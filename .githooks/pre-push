@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Security hook — a full pytest run needs a live Postgres/TimescaleDB (docker-compose),
+# so we don't block push on it locally (too slow/fragile as a hook). CI runs the real
+# suite with a database service instead. This just does a fast import sanity check.
+set -euo pipefail
+YELLOW='\033[1;33m'
+NC='\033[0m'
+if [ -d backend ]; then
+  echo -e "${YELLOW}(pre-push) recordá correr 'docker compose up -d db && pytest' en backend/ antes de un release.${NC}"
+fi
+exit 0

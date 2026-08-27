@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Security pre-commit hook — blocks commits containing secrets or forbidden files.
+# Runs on every `git commit` regardless of which tool/editor/AI agent invokes it,
+# because it's wired via `core.hooksPath` (see setup below), not tied to any IDE.
+#
+# Installed once per clone with:
+#   git config core.hooksPath .githooks
+set -euo pipefail
+
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$staged_files" ] && exit 0
+
+fail=0
+
+# 1. Block committing real .env-style files (allow .env.example / .env.sample / .env.template)
+for f in $staged_files; do
+  base=$(basename "$f")
+  if [[ "$base" =~ ^\.env(\..+)?$ ]] && [[ ! "$base" =~ \.(example|sample|template)$ ]]; then
+    echo -e "${RED}[BLOQUEADO]${NC} Estás por commitear un archivo de entorno real: $f"
+    fail=1
+  fi
+done
+
+# 2. Scan the actual staged diff content for secret-shaped strings
+pattern='(AIza[0-9A-Za-z_-]{20,})|(ghp_[0-9A-Za-z]{20,})|(github_pat_[0-9A-Za-z_]{20,})|(sk-[0-9A-Za-z]{20,})|(sk-proj-[0-9A-Za-z_-]{20,})|(xox[baprs]-[0-9A-Za-z-]{10,})|(AKIA[0-9A-Z]{16})|(-----BEGIN [A-Z ]*PRIVATE KEY-----)|((api[_-]?key|apikey|secret|password|token)\s*[:=]\s*["'\''][A-Za-z0-9_\-\.]{12,}["'\''])'
+
+hits=$(git diff --cached -U0 -- . ':!*.lock' ':!package-lock.json' ':!bun.lock' ':!yarn.lock' \
+  | grep -E '^\+' | grep -vE '^\+\+\+' | grep -EnI "$pattern" || true)
+
+if [ -n "$hits" ]; then
+  echo -e "${RED}[BLOQUEADO]${NC} Se detectó algo con forma de secreto/token en el diff:"
+  echo "$hits" | sed 's/^/  /'
+  fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo -e "${YELLOW}Si es un falso positivo, revisá igual antes de forzar con --no-verify.${NC}"
+  exit 1
+fi
+
+exit 0
