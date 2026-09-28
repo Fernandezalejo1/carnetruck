@@ -18,6 +18,20 @@ from fastapi.testclient import TestClient  # noqa: E402
 from app.db import Base, engine, SessionLocal  # noqa: E402
 from app.main import create_app  # noqa: E402
 
+# --- SQLite de tests: sin fsync por transacción -------------------------------
+# El seed demo encadena ~144 lecturas, cada una con commit. Con el journal
+# durable por defecto eso hacía que la suite tardara ~25 min. Este pragma es
+# solo para la base efímera de tests (no afecta dev ni producción).
+from sqlalchemy import event as _sa_event  # noqa: E402
+
+
+@_sa_event.listens_for(engine, "connect")
+def _fast_sqlite_for_tests(dbapi_connection, connection_record):  # noqa: ANN001
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA journal_mode=MEMORY")
+    cursor.execute("PRAGMA synchronous=OFF")
+    cursor.close()
+
 
 @pytest.fixture(autouse=True)
 def _clean_db():

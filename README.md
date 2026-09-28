@@ -4,21 +4,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688.svg)](https://fastapi.tiangolo.com/)
-[![Tests](https://img.shields.io/badge/tests-28%20passed-brightgreen)](https://github.com/Fernandezalejo1/carnetruck/tree/main/backend/tests)
+[![Tests](https://img.shields.io/badge/tests-36%20passed-brightgreen)](https://github.com/Fernandezalejo1/carnetruck/tree/main/backend/tests)
 [![Docker](https://img.shields.io/badge/docker-compose-ready-2496ED.svg)](https://docs.docker.com/compose/)
 [![TimescaleDB](https://img.shields.io/badge/TimescaleDB-316192.svg)](https://www.timescale.com/)
 
 ---
 
 Plataforma que recibe datos en tiempo real de sensores IoT instalados en contenedores cárnicos (temperatura, humedad, ubicación, apertura de puerta, tamper), los almacena de forma **inmutable y auditable** (hash SHA-256 encadenado por lectura), dispara **alertas** ante desvíos y genera **certificados PDF** de cadena de frío para presentar ante aduanas e importadores (China GACC, UE, USDA-FSIS).
-
----
-
-## Capturas de pantalla
-
-> 📸 **Demo disponible**: Ejecutá `docker compose up -d --build` y abrí http://localhost:8080
-> 
-> Credenciales demo: `admin@carnetruck.com` / `admin123`
 
 ---
 
@@ -32,6 +24,9 @@ Plataforma que recibe datos en tiempo real de sensores IoT instalados en contene
 - **Modo alertas sin infraestructura**: `ALERT_EVAL_MODE=sync` evalúa inline (cero infra para arrancar) o con Celery + Redis + beat.
 
 ## 📸 Capturas de pantalla
+
+> **Demo local**: `docker compose up -d --build` y abrí http://localhost:8080
+> Credenciales demo: `admin@carnetruck.com` / `admin123`
 
 ![Login](assets/screenshots/01-login.png)
 ![Dashboard](assets/screenshots/02-dashboard.png)
