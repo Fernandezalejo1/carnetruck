@@ -33,6 +33,7 @@ Plataforma que recibe datos en tiempo real de sensores IoT instalados en contene
 ![Detalle Envío](assets/screenshots/03-detalle-envio.png)
 ![Alertas](assets/screenshots/04-alertas.png)
 ![Certificados](assets/screenshots/05-certificados.png)
+![Nuevo envío](assets/screenshots/06-nuevo-envio.png)
 
 ## Arquitectura
 
@@ -105,6 +106,8 @@ pytest -q          # 20 tests: hash chain, alert engine, ingesta API, aislamient
 
 ## API principal
 
+Documentación Swagger interactiva: `http://localhost:8000/docs`
+
 | Método | Ruta | Auth | Descripción |
 |---|---|---|---|
 | POST | `/api/v1/auth/login` | — | Login JWT |
@@ -171,14 +174,6 @@ curl -X POST http://localhost:8000/api/v1/ingest \
 - **CORS restringido** — Orígenes configurados via variable de entorno
 
 Ver [SECURITY.md](SECURITY.md) para reportar vulnerabilidades.
-
-## 📚 API Documentation
-
-La documentación Swagger está disponible en:
-
-```
-http://localhost:8000/docs
-```
 
 ## 🤝 Contribuir
 
